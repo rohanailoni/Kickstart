@@ -90,6 +90,7 @@ class Solution{
                             
                             pq.add(new Block(max, i, j));
                             visited[i][j]=1;
+                            break;
                         }
                         
                     }
