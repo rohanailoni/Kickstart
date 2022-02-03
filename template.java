@@ -62,8 +62,14 @@ public class template{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
+            List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
+            }
+            int i=0;
+            for(String s:answer){
+                i++;
+                out.println("Case #"+Integer.toString(i)+": "+s);
             }
             out.close();
         } catch (Exception e) {
