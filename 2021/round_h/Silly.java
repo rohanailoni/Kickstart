@@ -109,24 +109,37 @@ public class Solution{
                 for(int i=0;i<s.length();i++){
                     list.add(Character.getNumericValue(s.charAt(i)));
                 }
-                sl.checker(list.header.next,0,1);
-				sl.checker(list.header.next,1,2);
-				sl.checker(list.header.next,2,3);
-				sl.checker(list.header.next,3,4);
-				sl.checker(list.header.next,4,5);
-				sl.checker(list.header.next,5,6);
-				sl.checker(list.header.next,6,7);
-				sl.checker(list.header.next,7,8);
-				sl.checker(list.header.next,8,9);
-				sl.checker(list.header.next,9,0);
-				
-				//System.out.println(list);
-				Node temp=list.header.next;
-				String ans="";
-				while(temp!=null){
-					ans+=Integer.toString(temp.value);temp=temp.next;
+				String pre;
+                while(true){
+					Node temp=list.header.next;
+					String ans="";
+					while(temp!=null){
+						ans+=Integer.toString(temp.value);temp=temp.next;
+					}
+					pre=ans;
+					sl.checker(list.header.next,0,1);
+					sl.checker(list.header.next,1,2);
+					sl.checker(list.header.next,2,3);
+					sl.checker(list.header.next,3,4);
+					sl.checker(list.header.next,4,5);
+					sl.checker(list.header.next,5,6);
+					sl.checker(list.header.next,6,7);
+					sl.checker(list.header.next,7,8);
+					sl.checker(list.header.next,8,9);
+					sl.checker(list.header.next,9,0);
+					
+					//System.out.println(list);
+					temp=list.header.next;
+					ans="";
+					while(temp!=null){
+						ans+=Integer.toString(temp.value);temp=temp.next;
+					}
+					if(pre.equals(ans)){
+						answer.add(ans);
+						break;
+					}
 				}
-                answer.add(ans);
+                
                 
             }
             int i=0;
