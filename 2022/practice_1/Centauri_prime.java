@@ -82,7 +82,7 @@ public class Solution{
 				if(ailic){
 					answer.add(s+" is ruled by "+"Alice.");
 				}else{
-					if(s.charAt(n-1)=='y'){
+					if(s.charAt(n-1)=='y' || s.charAt(n-1)=='Y'){
 						answer.add(s+" is ruled by "+"nobody.");
 					}else{
 						answer.add(s+" is ruled by "+"Bob.");
