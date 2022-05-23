@@ -57,50 +57,63 @@ public class Solution{
 			bw.close();
 		}
 	}
-    static int[] string_to_array(String[] arr){
+    int[] string_to_array(String[] arr){
         int[] ans=new int[arr.length];
         for(int i=0;i<arr.length;i++){
             ans[i]=Integer.parseInt(arr[i]);
         }
         return ans;
     }
+    int solve(int[] prefix,int[] cons){
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<cons[0];i++){
+            for(int j=i;j<cons[0];j++){
+                for(int x=j+1;x<cons[0];x++){
+                    for(int y=x;y<cons[0];y++){
+                        
+                        if(i==0){
+                            if(prefix[j]+(prefix[y]-prefix[x-1])==cons[1]){
+                                // System.out.println(prefix[y]-prefix[x-1]);;
+                                // System.out.println(x+" "+y+" "+i+" "+j+" "+cons[1]);
+                                //System.out.println((j-i)+(y-x));
+                                min=Math.min(min,(j-i)+(y-x)+2);
+                                //return (j-i)+(y-x);
+                            }
+                        }
+                        else if((prefix[j]-prefix[i-1])+(prefix[y]-prefix[x-1])==cons[1]){
+                            //System.out.println(x+" "+y+" "+i+" "+j);
+                            //System.out.println((j-i)+(y-x));
+                            min=Math.min(min,(j-i)+(y-x)+2);
+                            //return (j-i)+(y-x);
+                        }
+                    }
+                }
+            }
+        }
+        return min==Integer.MAX_VALUE?-1:min;
+    }
+    
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
             List<String>answer=new ArrayList<>();
+            Solution sol=new Solution();
             while(testCases-- > 0){
-                // write code here
-				int n=Integer.parseInt(in.nextLine());
-				int[] arr=string_to_array(in.nextLine().split(" "));
-				List<Integer>index=new ArrayList<>();
-				index.add(1);
-				for(int i=1;i<n;i++){
-					for(int j=i+1;j>=1;j--){
-						int cont=0;
-						for(int k=0;k<=i;k++){
-							if(arr[k]>=j){
-								cont++;
-							}
-						}
-						//out.println("i is "+i+" count is "+cont+" "+j);
-						if(cont>=j){
-							index.add(j);
-							//out.println(j+" "+i+" ");
-							break;
-						}else if(j==1){
-							index.add(1);
-							break;
-						}
-					}
-				}
-				//out.println(index);
-				String ans="";
-				for(int i:index){
-					ans+=i+" ";
-				}
-				answer.add(ans);
+                int[] cons=sol.string_to_array(in.nextLine().split(" "));
+                
+                int[] arr=sol.string_to_array(in.nextLine().split(" "));
+                
+                int[] prefix=new int[cons[0]];
+                prefix[0]=arr[0];
+                for(int i=1;i<cons[0];i++){
+                    prefix[i]=arr[i]+prefix[i-1]; 
+                    //System.out.print(prefix[i]+" ");
+                }
+               //System.out.println(cons);
+                answer.add(Integer.toString(sol.solve(prefix, cons)));
+
             }
             int i=0;
             for(String s:answer){
@@ -109,8 +122,7 @@ public class Solution{
             }
             out.close();
         } catch (Exception e) {
-            return;
+            System.out.print(e);
         }
     }
 }
-

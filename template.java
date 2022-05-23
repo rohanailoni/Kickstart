@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class template{
+public class Solution{
     static class FastReader{
         BufferedReader br;
         StringTokenizer st;
@@ -57,6 +57,13 @@ public class template{
 			bw.close();
 		}
 	}
+    int[] string_to_array(String[] arr){
+        int[] ans=new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            ans[i]=Integer.parseInt(arr[i]);
+        }
+        return ans;
+    }
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();

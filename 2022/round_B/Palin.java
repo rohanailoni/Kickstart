@@ -64,6 +64,13 @@ public class Solution{
         }
         return ans;
     }
+	static boolean palind(String ans){
+		StringBuffer sbr=new StringBuffer(ans);
+				String aa=sbr.reverse().toString();
+				if(aa.equals(ans)){
+					return true;
+				}else{return false;}
+	}
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -72,35 +79,15 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
-				int n=Integer.parseInt(in.nextLine());
-				int[] arr=string_to_array(in.nextLine().split(" "));
-				List<Integer>index=new ArrayList<>();
-				index.add(1);
-				for(int i=1;i<n;i++){
-					for(int j=i+1;j>=1;j--){
-						int cont=0;
-						for(int k=0;k<=i;k++){
-							if(arr[k]>=j){
-								cont++;
-							}
-						}
-						//out.println("i is "+i+" count is "+cont+" "+j);
-						if(cont>=j){
-							index.add(j);
-							//out.println(j+" "+i+" ");
-							break;
-						}else if(j==1){
-							index.add(1);
-							break;
-						}
+				String qq=in.nextLine();
+				int n=Integer.parseInt(qq);
+				int ans=0;
+				for(int i=1;i<n+1;i++){
+					if(n%i==0 && palind(Integer.toString(i))){
+						ans++;
 					}
 				}
-				//out.println(index);
-				String ans="";
-				for(int i:index){
-					ans+=i+" ";
-				}
-				answer.add(ans);
+				answer.add(Integer.toString(ans));
             }
             int i=0;
             for(String s:answer){

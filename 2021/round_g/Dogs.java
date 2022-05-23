@@ -57,7 +57,7 @@ public class Solution{
 			bw.close();
 		}
 	}
-    static int[] string_to_array(String[] arr){
+    int[] string_to_array(String[] arr){
         int[] ans=new int[arr.length];
         for(int i=0;i<arr.length;i++){
             ans[i]=Integer.parseInt(arr[i]);
@@ -69,38 +69,34 @@ public class Solution{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
+            Solution sol=new Solution();
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
-                // write code here
-				int n=Integer.parseInt(in.nextLine());
-				int[] arr=string_to_array(in.nextLine().split(" "));
-				List<Integer>index=new ArrayList<>();
-				index.add(1);
-				for(int i=1;i<n;i++){
-					for(int j=i+1;j>=1;j--){
-						int cont=0;
-						for(int k=0;k<=i;k++){
-							if(arr[k]>=j){
-								cont++;
-							}
-						}
-						//out.println("i is "+i+" count is "+cont+" "+j);
-						if(cont>=j){
-							index.add(j);
-							//out.println(j+" "+i+" ");
-							break;
-						}else if(j==1){
-							index.add(1);
-							break;
-						}
-					}
-				}
-				//out.println(index);
-				String ans="";
-				for(int i:index){
-					ans+=i+" ";
-				}
-				answer.add(ans);
+                int[] arr=sol.string_to_array(in.nextLine().split(" "));
+                String s=in.nextLine();
+                int D=arr[1];
+                Long C=new Long(arr[2]);
+                int M=arr[3];
+                int N=arr[0];
+                boolean ans=true;
+                //System.out.println(s+" "+N+" "+M+" "+D+" "+C);
+                for(int i=0;i<N;i++){
+                    if(s.charAt(i)=='D'){
+                       if(D<=0 || C<0){
+                           ans=false;
+                           break;
+                       }
+                       D--;
+                       C+=M;
+                    }else {
+                       C--;
+                    }
+                }
+                if(ans)answer.add("YES");
+                else{
+                    answer.add("NO");
+                }
+                
             }
             int i=0;
             for(String s:answer){
@@ -113,4 +109,3 @@ public class Solution{
         }
     }
 }
-

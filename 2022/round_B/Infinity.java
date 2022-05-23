@@ -72,35 +72,25 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
-				int n=Integer.parseInt(in.nextLine());
 				int[] arr=string_to_array(in.nextLine().split(" "));
-				List<Integer>index=new ArrayList<>();
-				index.add(1);
-				for(int i=1;i<n;i++){
-					for(int j=i+1;j>=1;j--){
-						int cont=0;
-						for(int k=0;k<=i;k++){
-							if(arr[k]>=j){
-								cont++;
-							}
-						}
-						//out.println("i is "+i+" count is "+cont+" "+j);
-						if(cont>=j){
-							index.add(j);
-							//out.println(j+" "+i+" ");
-							break;
-						}else if(j==1){
-							index.add(1);
-							break;
-						}
+				int r=arr[0];
+				int a=arr[1];
+				int b=arr[2];
+				int sum=r;
+				boolean check=false;
+				double ans=0;
+				while(sum>0){
+					if(!check){
+						check=true;
+						ans=ans+3.141592653589793238462643383279502884197169399375105820974944592307816406286*sum*sum;
+						sum=sum*a;
+					}else{
+						check=false;
+						ans=ans+3.141592653589793238462643383279502884197169399375105820974944592307816406286*sum*sum;
+						sum=sum/b;
 					}
 				}
-				//out.println(index);
-				String ans="";
-				for(int i:index){
-					ans+=i+" ";
-				}
-				answer.add(ans);
+				answer.add(String.valueOf(ans));
             }
             int i=0;
             for(String s:answer){

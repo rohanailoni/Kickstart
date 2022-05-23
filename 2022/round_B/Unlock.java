@@ -57,7 +57,7 @@ public class Solution{
 			bw.close();
 		}
 	}
-    static int[] string_to_array(String[] arr){
+    int[] string_to_array(String[] arr){
         int[] ans=new int[arr.length];
         for(int i=0;i<arr.length;i++){
             ans[i]=Integer.parseInt(arr[i]);
@@ -72,35 +72,6 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
-				int n=Integer.parseInt(in.nextLine());
-				int[] arr=string_to_array(in.nextLine().split(" "));
-				List<Integer>index=new ArrayList<>();
-				index.add(1);
-				for(int i=1;i<n;i++){
-					for(int j=i+1;j>=1;j--){
-						int cont=0;
-						for(int k=0;k<=i;k++){
-							if(arr[k]>=j){
-								cont++;
-							}
-						}
-						//out.println("i is "+i+" count is "+cont+" "+j);
-						if(cont>=j){
-							index.add(j);
-							//out.println(j+" "+i+" ");
-							break;
-						}else if(j==1){
-							index.add(1);
-							break;
-						}
-					}
-				}
-				//out.println(index);
-				String ans="";
-				for(int i:index){
-					ans+=i+" ";
-				}
-				answer.add(ans);
             }
             int i=0;
             for(String s:answer){

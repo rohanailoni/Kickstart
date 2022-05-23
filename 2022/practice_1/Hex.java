@@ -147,7 +147,7 @@ public class Solution{
 					}
 				}
 				out.print(red_cr+" "+blue_cr);
-				if(blue_cr==red_cr-1 || red_cr==blue_cr-1){
+				if(true){
 					
 					
 				
