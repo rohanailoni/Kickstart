@@ -57,10 +57,10 @@ public class Solution{
 			bw.close();
 		}
 	}
-    static int[] string_to_array(String[] arr){
-        int[] ans=new int[arr.length];
+    static long[] string_to_array(String[] arr){
+        long[] ans=new long[arr.length];
         for(int i=0;i<arr.length;i++){
-            ans[i]=Integer.parseInt(arr[i]);
+            ans[i]=Long.parseLong(arr[i]);
         }
         return ans;
     }
@@ -72,6 +72,13 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
+				long[] arr=string_to_array(in.nextLine().split(" "));
+				long l=arr[0];
+				long r=arr[1];
+				long min=Math.min(l,r);
+				answer.add(Long.toString((min*(min+1)/2)));
+				
+
             }
             int i=0;
             for(String s:answer){
