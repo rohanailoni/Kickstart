@@ -71,7 +71,13 @@ public class Solution{
         }
         return ans;
     }
-    
+	static long[] sub(long A[],long B[],int n){
+		long[] ans =new long[n];
+		for(int i=0;i<n;i++){
+			ans[i]=Math.abs(A[i]-B[i]);
+		}
+		return ans;
+	} 
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -84,17 +90,33 @@ public class Solution{
 				String block=in.nextLine();
 				int Q=data[1];
 				int count=0;
+				long[][] cache=new long[data[0]][26];
+				long[] temp=new long[26];
+				for(int j=0;j<data[0];j++){
+					temp[block.charAt(j)-'A']++;
+					cache[j]=temp.clone();
+				}
+				// System.out.println(Arrays.deepToString(cache));
+
 				for(int i=0;i<Q;i++){
 					int[] quer=string_to_array(in.nextLine().split(" "));
 					int len=(quer[1]-quer[0])+1;
+					// int[] cache=new int[26];
+					// for(int j=(int)quer[0]-1;j<=quer[1]-1;j++){
+					// 		cache[block.charAt(j)-'A']++;
+					// }
+					int low=quer[0]-2;
+					int upper=quer[1]-1;
+					if(low==-1){temp=cache[upper];}
+					else{temp=sub(cache[low], cache[upper], 26);}
+					// System.out.println(Arrays.toString(temp));
+
+					
+
 					if(len%2==0){
-						int[] cache=new int[26];
-						for(int j=(int)quer[0]-1;j<=quer[1]-1;j++){
-							cache[block.charAt(j)-'A']++;
-						}
 						boolean sep=false;
 						for(int j=0;j<26;j++){
-							if(cache[j]!=0 && cache[j]%2!=0){
+							if(temp[j]!=0 && temp[j]%2!=0){
 								sep=true;
 								break;
                             }
@@ -104,16 +126,12 @@ public class Solution{
 
 					}else{
 						boolean single=false;
-						int[] cache=new int[26];
-						for(int j=(int)quer[0]-1;j<=quer[1]-1;j++){
-							cache[block.charAt(j)-'A']++;
-						}
 						boolean sep=false;
 						for(int j=0;j<26;j++){
-							if(cache[j]!=0 && cache[j]%2!=0 && single==false){
+							if(temp[j]!=0 && temp[j]%2!=0 && single==false){
 								single=true;	
 							}	
-							else if(cache[j]!=0 && cache[j]%2!=0 && single==true){
+							else if(temp[j]!=0 && temp[j]%2!=0 && single==true){
 								sep=true;
 								single=false;
 								break;
