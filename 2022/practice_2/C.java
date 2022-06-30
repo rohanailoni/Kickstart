@@ -64,6 +64,14 @@ public class Solution{
         }
         return ans;
     }
+    static long[] string_to_Longarray(String[] arr){
+        long[] ans=new long[arr.length];
+        for(int i=0;i<arr.length;i++){
+            ans[i]=Long.parseLong(arr[i]);
+        }
+        return ans;
+    }
+    
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -72,6 +80,52 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
+				int[] data=string_to_array(in.nextLine().split(" "));
+				String block=in.nextLine();
+				int Q=data[1];
+				int count=0;
+				for(int i=0;i<Q;i++){
+					int[] quer=string_to_array(in.nextLine().split(" "));
+					int len=(quer[1]-quer[0])+1;
+					if(len%2==0){
+						int[] cache=new int[26];
+						for(int j=(int)quer[0]-1;j<=quer[1]-1;j++){
+							cache[block.charAt(j)-'A']++;
+						}
+						boolean sep=false;
+						for(int j=0;j<26;j++){
+							if(cache[j]!=0 && cache[j]%2!=0){
+								sep=true;
+								break;
+                            }
+						}
+
+						if(!sep){count++;}
+
+					}else{
+						boolean single=false;
+						int[] cache=new int[26];
+						for(int j=(int)quer[0]-1;j<=quer[1]-1;j++){
+							cache[block.charAt(j)-'A']++;
+						}
+						boolean sep=false;
+						for(int j=0;j<26;j++){
+							if(cache[j]!=0 && cache[j]%2!=0 && single==false){
+								single=true;	
+							}	
+							else if(cache[j]!=0 && cache[j]%2!=0 && single==true){
+								sep=true;
+								single=false;
+								break;
+							}
+						}
+						//System.out.println(sep+" "+single+" ");
+						if(!sep && single){count++;}
+
+					}
+
+				}
+				answer.add(Integer.toString(count));
             }
             int i=0;
             for(String s:answer){
@@ -80,7 +134,9 @@ public class Solution{
             }
             out.close();
         } catch (Exception e) {
+			System.out.println(e);
             return;
+
         }
     }
 }
