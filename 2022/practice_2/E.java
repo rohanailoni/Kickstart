@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+//parcel problem
 
 public class Solution{
     static class FastReader{
@@ -64,6 +65,27 @@ public class Solution{
         }
         return ans;
     }
+	static int lookout(int[][] m,int x,int y,List<pair>sto){
+		int max=Integer.MIN_VALUE;
+		int n=sto.size();
+		m[x][y]=1;
+		for(int i=0;i<m.length;i++){
+			for(int j=0;j<m[0].length;j++){
+				if(m[i][j]!=1){
+					int min =Integer.MAX_VALUE;
+				for(int k=0;k<n;k++){
+					pair p=sto.get(k);
+					min=Math.min(Math.abs(i-p.x)+Math.abs(j-p.y), min);
+					}
+					min=Math.min(Math.abs(i-x)+Math.abs(j-y),min);
+					max=Math.max(max,min);
+				}
+			}
+		}
+		m[x][y]=0;
+		//System.out.println("max"+max+" "+x+" "+y);
+		return max==Integer.MIN_VALUE?0:max;
+	}
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -72,6 +94,33 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
+				int[] arr=string_to_array(in.nextLine().split(" "));
+				int r=arr[0];
+				int c=arr[1];
+				int[][] map=new int[r][c];
+				for(int i=0;i<r;i++){	
+					map[i]=string_to_array(in.nextLine().split(""));
+				}
+				// out.println(Arrays.deepToString(map));
+				List<pair>store=new ArrayList<>();
+				for(int i=0;i<r;i++){
+					for(int j=0;j<c;j++){
+						if(map[i][j]==1){
+							store.add(new pair(i,j));
+						}
+					}
+				}
+				int min=Integer.MAX_VALUE;
+				for(int i=0;i<r;i++){
+					for(int j=0;j<c;j++){
+						if(map[i][j]!=1){
+							min=Math.min(min,lookout(map,i, j,store));
+							//System.out.println(min);
+						}
+					}
+				}
+				answer.add(Integer.toString(min==Integer.MAX_VALUE?0:min));
+
             }
             int i=0;
             for(String s:answer){
@@ -80,9 +129,16 @@ public class Solution{
             }
             out.close();
         } catch (Exception e) {
+			System.out.println(e);
             return;
         }
     }
 }
 
-
+class pair{
+	int x,y;
+	pair(int x,int y){
+		this.x=x;
+		this.y=y;
+	}
+}
