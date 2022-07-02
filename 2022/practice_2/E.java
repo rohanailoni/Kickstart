@@ -86,6 +86,51 @@ public class Solution{
 		//System.out.println("max"+max+" "+x+" "+y);
 		return max==Integer.MIN_VALUE?0:max;
 	}
+	static int look(int[][] m,List<pair>sto){
+		int max=Integer.MIN_VALUE;	
+		int n=sto.size();
+		int ix=-1;
+		int iy=-1;
+		for(int i=0;i<m.length;i++){
+			for(int j=0;j<m[0].length;j++){
+				if(m[i][j]!=1){
+					int min=Integer.MAX_VALUE;
+					for(int k=0;k<n;k++){
+						pair p=sto.get(k);
+						min=Math.min(min,Math.abs(i-p.x)+Math.abs(j-p.y));
+					}	
+					if(min>max){
+						max=min;
+						ix=i;
+						iy=j;
+						// System.out.println(max);
+					}
+				}
+			}
+		}
+		if(ix==-1 && iy==-1){
+			return 0;
+		}
+		m[ix][iy]=1;
+		sto.add(new pair(ix,iy));
+		//System.out.println(Arrays.deepToString(m));
+		max=Integer.MIN_VALUE;
+		
+		for(int i=0;i<m.length;i++){
+			for(int j=0;j<m[0].length;j++){
+				if(m[i][j]!=1){
+					int min=Integer.MAX_VALUE;
+					for(int k=0;k<n+1;k++){
+						pair p=sto.get(k);
+						min=Math.min(min,Math.abs(i-p.x)+Math.abs(j-p.y));
+					}	
+					max=Math.max(max,min);
+				}
+			}
+		}
+		//System.out.println(max);
+		return max==Integer.MAX_VALUE?0:max;
+	}
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -111,15 +156,16 @@ public class Solution{
 					}
 				}
 				int min=Integer.MAX_VALUE;
-				for(int i=0;i<r;i++){
-					for(int j=0;j<c;j++){
-						if(map[i][j]!=1){
-							min=Math.min(min,lookout(map,i, j,store));
-							//System.out.println(min);
-						}
-					}
-				}
-				answer.add(Integer.toString(min==Integer.MAX_VALUE?0:min));
+				//for(int i=0;i<r;i++){
+				//	for(int j=0;j<c;j++){
+				//		if(map[i][j]!=1){
+				//			min=Math.min(min,lookout(map,i, j,store));
+				//			//System.out.println(min);
+				//		}
+				//	}
+				//}
+				//look(map,store);
+				answer.add(Integer.toString(look(map,store)));
 
             }
             int i=0;
