@@ -72,20 +72,6 @@ public class Solution{
         return ans;
     }
     
-	static int f(int ai,int aj,int bi,int bj,int k,int n,int m,int[] arr,int[] arr1){
-		if(k==0){
-			return 0;
-		}
-		if((ai-1)+(n-aj)>n || (bi-1)+(m-bj)>m){
-			return Integer.MIN_VALUE;
-		}
-		int a,b,c,d;
-		a=f(ai+1,aj,bi,bj,k-1,n,m,arr,arr1)+arr[ai];
-		b=f(ai,aj-1,bi,bj,k-1,n,m,arr,arr1)+arr[aj];
-		c=f(ai,aj,bi+1,bj,k-1,n,m,arr,arr1)+arr1[bi];
-		d=f(ai,aj,bi,bj-1,k-1,n,m,arr,arr1)+arr1[bj];
-		return Math.max(Math.max(a,b),Math.max(c,d));
-	}
     public static void main(String[] args) {
         try {
             FastReader in=new FastReader();
@@ -94,57 +80,6 @@ public class Solution{
             List<String>answer=new ArrayList<>();
             while(testCases-- > 0){
                 // write code here
-				int n=Integer.parseInt(in.nextLine());
-				int[] image=string_to_array(in.nextLine().split(" "));
-				int m=Integer.parseInt(in.nextLine());
-				int[] audio=string_to_array(in.nextLine().split(" "));
-				int krk=Integer.parseInt(in.nextLine());
-				int[] image_pre=new int[n+1];
-				int[] audio_pre=new int[m+1];
-				image_pre[n-1]=image[n-1];
-				for(int i=n-2;i>=0;i--){
-					image_pre[i]=image[i]+image_pre[i+1];
-				}
-				audio_pre[m-1]=audio[m-1];
-				for(int j=m-2;j>=0;j--){
-					audio_pre[j]=audio[j]+audio_pre[j+1];
-				}
-				// System.out.println(Arrays.toString(image_pre)+" "+Arrays.toString(audio_pre));
-				int[] image_suf=new int[n+1];
-				int[] audio_suf=new int[m+1];
-				image_suf[0]=image[0];
-				audio_suf[0]=audio[0];
-				for(int i=1;i<n;i++){
-					image_suf[i]=image[i]+image_suf[i-1];
-				}
-				for(int i=1;i<m;i++){
-					audio_suf[i]=audio[i]+audio_suf[i-1];
-				}
-				//suf means from start;
-				//pre means from end;
-				out.println(f(0,n-1,0,m-1,krk,n,m,image,audio));
-				// System.out.println(Arrays.toString(image_suf)+" "+Arrays.toString(audio_suf));
-				// int max=Integer.MIN_VALUE;
-				// for(int i=0;i<n;i++){
-				// 	for(int j=n;j>i && j>=0;j--){
-				// 		for(int k=0;k<m;k++){
-				// 			for(int l=m;l>k && l>=0;l--){
-				// 				if(i+1+k+1+(n-j)+(m-l)==krk){
-				// 					int summ=image_suf[i]+image_pre[j]+audio_suf[k]+audio_pre[l];
-				// 					// System.out.println(i+" "+j+" "+k+" "+l+" "+summ);
-
-				// 					if(summ>max){
-				// 						max=summ;
-				// 					}
-				// 				}
-				// 			}
-				// 		}
-				// 	}
-				// }
-				// answer.add(Integer.toString(max));
-
-
-
             }
             int i=0;
             for(String s:answer){
