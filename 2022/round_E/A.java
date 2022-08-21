@@ -78,13 +78,20 @@ public class Solution{
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
             List<String>answer=new ArrayList<>();
+			int i=1;
             while(testCases-- > 0){
                 // write code here
-            }
-            int i=0;
-            for(String s:answer){
-                i++;
-                out.println("Case #"+Integer.toString(i)+": "+s);
+				int n=Integer.parseInt(in.nextLine());
+				int b=1;
+				int ans=0;
+				int j=n;
+				while(b<=j){
+					ans++;
+					b+=2;
+					j-=3;
+				}
+				out.println("Case #"+Integer.toString(i)+": "+Integer.toString(ans));
+				i++;
             }
             out.close();
         } catch (Exception e) {
