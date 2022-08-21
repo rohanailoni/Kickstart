@@ -77,7 +77,6 @@ public class Solution{
             FastReader in=new FastReader();
             FastWriter out = new FastWriter();
             int testCases=in.nextInt();
-            List<String>answer=new ArrayList<>();
 			int ca=0;
             while(testCases-- > 0){
                 // write code here
@@ -87,37 +86,62 @@ public class Solution{
 				Arrays.sort(copy_rating);
 				HashMap<Integer,Integer>mapping=new HashMap<>();
 				for(int i=0;i<n;i++){
-					boolean is=false;
+					// boolean is=false;
+					// int doub=copy_rating[i]*2;
+					// if(mapping.containsKey(copy_rating[i])){
+					// 	continue;
+					// }else{
+					// 	for(int j=n-1;j>i;j--){
+					// 		if(doub>=copy_rating[j]){
+					// 			is=true;
+					// 			mapping.put(copy_rating[i],copy_rating[j]);
+					// 			break;
+					// 		}
+					// 	}
+					// 	if(!is){
+					// 		if(i!=0){
+					// 			mapping.put(copy_rating[i],copy_rating[i-1]);
+					// 		}else{
+					// 			mapping.put(copy_rating[i],-1);
+					// 		}	
+					// 	}
+					// }
+					boolean is =false;
 					int doub=copy_rating[i]*2;
 					if(mapping.containsKey(copy_rating[i])){
 						continue;
 					}else{
-						for(int j=n-1;j>i;j--){
-							if(doub>=copy_rating[j]){
-								is=true;
-								mapping.put(copy_rating[i],copy_rating[j]);
-								break;
+						System.out.println(Arrays.toString(copy_rating));
+						int up=i;
+						int down=n-1;
+						int mid=-1;
+						while(up<down){
+							mid=(up+down)/2;
+							if(copy_rating[mid]==doub){
+								out.println(mid);
+							}else if(copy_rating[mid]>doub){
+								down=mid;
+							}else{
+								up=mid+1;
 							}
 						}
-						if(!is){
-							if(i!=0){
-								mapping.put(copy_rating[i],copy_rating[i-1]);
-							}else{
-								mapping.put(copy_rating[i],-1);
-							}	
+						if(mid!=-1){
+							
 						}
+						out.println(up+" "+down+" "+mid);
 					}
+
 				}
 				ca++;
-				List<Integer>ans=new ArrayList<>();
-				String ss="";
-				for(int i=0;i<n-1;i++){
+				// List<Integer>ans=new ArrayList<>();
+				// String ss="";
+				// for(int i=0;i<n-1;i++){
 
-					ss+=Integer.toString(mapping.get(rating[i]))+" ";
-				}
-				ss+=Integer.toString(mapping.get(rating[n-1]))+" ";
+				// 	ss+=Integer.toString(mapping.get(rating[i]))+" ";
+				// }
+				// ss+=Integer.toString(mapping.get(rating[n-1]))+" ";
 
-				System.out.println("Case #"+Integer.toString(ca)+": "+ss);
+				// System.out.println("Case #"+Integer.toString(ca)+": "+ss);
             }
             out.close();
         } catch (Exception e) {
